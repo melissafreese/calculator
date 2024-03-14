@@ -1,3 +1,32 @@
 * {
 	font-family: "Roboto";
 }
+
+.container {
+    background-color: black;
+    padding: 10px;
+    
+}
+.display {
+    color: white;
+    padding: 5px;
+}
+.light-gray-button {
+	background-color: #c3c3c3;
+	border: none;
+    border-radius: 50%;
+}
+
+.dark-gray-button {
+	background-color: #565656;
+	color: white;
+	border: none;
+    border-radius: 50%
+}
+
+.orange-button {
+    background-color: #FFA733;
+    color: white;
+    border: none;
+    border-radius: 50%
+}
