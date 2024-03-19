@@ -10,7 +10,7 @@ body {
 	background-image: linear-gradient(to right, #434343 0%, black 100%);
 	min-height: 100vh;
 }
-.container {
+#calculator {
     margin: auto;
 	background-color: black;
 	position: absolute;
@@ -20,6 +20,7 @@ body {
 	padding: 10px;
     border-radius: 5%;
     box-shadow: 5px 5px rgba(0, 170, 255, 0.034);
+ 
     
 }
 .display {
