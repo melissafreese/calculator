@@ -1,1 +1,1 @@
-let result = (document.getElementById("display").textContent = "0");
+// let result = (document.getElementById("display").innerHTML = "0");

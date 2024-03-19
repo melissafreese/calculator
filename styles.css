@@ -3,6 +3,7 @@
 	padding: 0;
 	font-family: "Roboto";
 	font-size: 24px;
+    cursor: pointer;
 }
 
 body {
@@ -24,6 +25,9 @@ body {
 .display {
 	color: whitesmoke;
 	padding: 5px;
+    margin: 30px;
+    display: inline-block;
+    text-align: right;
 }
 
 .light-gray-button {
@@ -65,4 +69,8 @@ body {
 #buttons {
     margin: 2px;
     padding: 5px;
+}
+
+#buttons:active {
+    transform: scale(0.98);
 }
