@@ -27,6 +27,19 @@ html {
  
     
 }
+
+#calculator-input {
+    font-size: 50px;
+    margin: auto;
+    display: block;
+    color: white;
+    background-color: black;
+    border: none;
+    width: 100%;
+    text-align: right;
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
 #input-wrapper {
 	color: whitesmoke;
 	padding: 5px;
