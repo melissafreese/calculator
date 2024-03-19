@@ -30,7 +30,7 @@ body {
     text-align: right;
 }
 
-.light-gray-button {
+.gray {
 	background-color: #c3c3c3;
     background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
     background-blend-mode: multiply,multiply;	
@@ -43,7 +43,7 @@ body {
 	text-align: center;
 }
 
-.dark-gray-button {
+.black {
 	background-color: #3c3c3c;
 	background-image: linear-gradient(to right, #434343 0%, black 100%);
 	color: whitesmoke;
@@ -54,7 +54,7 @@ body {
 	display: inline-block;
 	text-align: center;
 }
-.orange-button {
+.orange {
 	background-color: #ff9c1a;
 	background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
 	color: whitesmoke;
