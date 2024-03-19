@@ -84,5 +84,5 @@ body {
 }
 
 #button-container button:hover {
-	background-color: #c7c7c7 !important;
+	opacity: 90% !important;
 }
