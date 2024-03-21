@@ -96,3 +96,8 @@ body {
 #button-container button:hover {
 	opacity: 90% !important;
 }
+
+
+#button-container button:active {
+	opacity: 100% !important;
+}

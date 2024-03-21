@@ -16,29 +16,27 @@
 	<body>
 		<div id="container">
 			<div id="calculator">
-				<div id="input-wrapper">
-					<input readonly id="calculator-input" />
-				</div>
+				<div id="input-wrapper"><input readonly id="calculator-input" />0</div>
 				<div id="button-container">
-					<button class="gray">AC</button>
-					<button class="gray">&#177;</button>
-					<button class="gray">&#37;</button>
-					<button class="orange">&#247;</button>
-					<button class="black">7</button>
-					<button class="black">8</button>
-					<button class="black">9</button>
-					<button class="orange">X</button>
-					<button class="black">4</button>
-					<button class="black">5</button>
-					<button class="black">6</button>
-					<button class="orange">&#8722;</button>
-					<button class="black">1</button>
-					<button class="black">2</button>
-					<button class="black">3</button>
-					<button class="orange">&#43;</button>
-					<button class="width-2 black">0</button>
-					<button class="black">&#46;</button>
-					<button class="orange">&#61;</button>
+					<button class="gray" onclick="clearDisplay()">AC</button>
+					<button class="gray" onclick="deleteNum()">DEL</button>
+					<button class="gray" onclick="appendToDisplay('%')">&#37;</button>
+					<button class="orange" onclick="calculate()">&#247;</button>
+					<button class="black" onclick="appendToDisplay('7')">7</button>
+					<button class="black" onclick="appendToDisplay('8')">8</button>
+					<button class="black" onclick="appendToDisplay('9')">9</button>
+					<button class="orange" onclick="calculate()">x</button>
+					<button class="black" onclick="appendToDisplay('4')">4</button>
+					<button class="black" onclick="appendToDisplay('5')">5</button>
+					<button class="black" onclick="appendToDisplay('6')">6</button>
+					<button class="orange" onclick="calculate()">&#8722;</button>
+					<button class="black" onclick="appendToDisplay('1')">1</button>
+					<button class="black" onclick="appendToDisplay('2')">2</button>
+					<button class="black" onclick="appendToDisplay('3')">3</button>
+					<button class="orange" onclick="calculate()">&#43;</button>
+					<button class="width-2 black" onclick="appendToDisplay('0')">0</button>
+					<button class="black" onclick="appendToDisplay('.')">&#46;</button>
+					<button class="orange" onclick="calculate()">&#61;</button>
 				</div>
 			</div>
 		</div>
