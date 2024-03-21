@@ -27,7 +27,7 @@ body {
 	box-shadow: 0 0 30px 10px #afafb0;
 }
 
-#calculator-input {
+#display {
 	font-family: "Roboto";
 	font-size: 50px;
 	margin: auto;
@@ -40,7 +40,7 @@ body {
 	padding: 10px 30px;
 	box-sizing: border-box;
 }
-#input-wrapper {
+#display-wrapper {
 	color: whitesmoke;
 	padding: 5px;
 	margin: 30px;
