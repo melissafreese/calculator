@@ -11,7 +11,6 @@ function clearDisplay() {
 
 function calculate() {}
 
-
 // function calculate() {
 // 	try {
 // 		display.value = eval(display.value);
@@ -20,6 +19,7 @@ function calculate() {}
 // 	}
 // }
 
-function deleteNum(num) {
-
+// deletes the last key entered when 'DEL' button is pressed
+function deleteNum() {
+	display.value = display.value.slice(0, -1);
 }
