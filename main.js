@@ -6,8 +6,11 @@ function appendToDisplay(input) {
 }
 // resets and clears the entire display when 'AC' button is pressed
 function clearDisplay() {
-	display.value = "0";
+	display.value = "";
 }
+
+function calculate() {}
+
 
 // function calculate() {
 // 	try {
@@ -17,6 +20,6 @@ function clearDisplay() {
 // 	}
 // }
 
-// function deleteNum(num) {
-// 	display.value = num.slice;
-// }
+function deleteNum(num) {
+
+}
