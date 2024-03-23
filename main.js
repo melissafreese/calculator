@@ -1,25 +1,61 @@
+// Get the display element buttons
 const display = document.getElementById("display");
+// const operators = ['+', "-", "*", "/", '%'];
 
-// appends numbers and operators to the display area when user clicks buttons on the calculator
+
+// Variables to store the current operation and operands ????
+let currentInput = "";
+let operation = null;
+// let firstOperand = "";
+// let secondOperand = "";
+
+// Append Display Function
 function appendToDisplay(input) {
 	display.value += input;
 }
-// resets and clears the entire display when 'AC' button is pressed
+// Clear Display Function
 function clearDisplay() {
 	display.value = "";
 }
 
-function calculate() {}
-
-// function calculate() {
-// 	try {
-// 		display.value = eval(display.value);
-// 	} catch (error) {
-// 		display.value = "Error";
-// 	}
-// }
-
-// deletes the last key entered when 'DEL' button is pressed
+// Delete Function
 function deleteNum() {
 	display.value = display.value.slice(0, -1);
 }
+
+
+// Calculate Function
+function calculate() {
+	const [firstOperand,_,secondOperand] = currentInput.split('');
+	let result;
+
+	switch (currentInput) {
+		case "+":
+			result = parseFloat(firstOperand) + parseFloat(secondOperand);
+			break;
+
+		case "-":
+			result = parseFloat(firstOperand) - parseFloat(secondOperand);
+			break;
+
+		case "*":
+			result = parseFloat(firstOperand) * parseFloat(secondOperand);
+			break;
+		case "/":
+			result = parseFloat(firstOperand) / parseFloat(secondOperand);
+			break;
+		
+	}
+	display.value = result;
+	currentInput = `${result}`;
+	operation = null;
+}
+// Keyboard support
+document.addEventListener('keydown', function(e) {
+	let key = e.key;
+	if(!isNaN(key)) {
+		appendToDisplay(key);
+	} else {
+		alert('Error: Invalid input')
+	}
+});
