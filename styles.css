@@ -1,7 +1,7 @@
-html {
+/* html {
 	height: 100%;
 	width: 100%;
-}
+} */
 body {
 	background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
 	background-blend-mode: screen;

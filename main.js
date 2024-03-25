@@ -1,13 +1,11 @@
-// Get the display element buttons
+// Get the display element
 const display = document.getElementById("display");
-// const operators = ['+', "-", "*", "/", '%'];
-
 
 // Variables to store the current operation and operands ????
 let currentInput = "";
 let operation = null;
-// let firstOperand = "";
-// let secondOperand = "";
+let firstOperand = "";
+let secondOperand = "";
 
 // Append Display Function
 function appendToDisplay(input) {
@@ -23,10 +21,16 @@ function deleteNum() {
 	display.value = display.value.slice(0, -1);
 }
 
+// Set Operation Function ????
+function setOperation(op) {
+	operation = op;
+	currentInput = `${op}`;
+	display.value = currentInput;
+}
 
-// Calculate Function
+// Calculate Function ???
 function calculate() {
-	const [firstOperand,_,secondOperand] = currentInput.split('');
+	const [firstOperand, _, secondOperand] = currentInput.split("");
 	let result;
 
 	switch (currentInput) {
@@ -44,18 +48,26 @@ function calculate() {
 		case "/":
 			result = parseFloat(firstOperand) / parseFloat(secondOperand);
 			break;
-		
 	}
+
 	display.value = result;
 	currentInput = `${result}`;
 	operation = null;
 }
-// Keyboard support
-document.addEventListener('keydown', function(e) {
+
+// Keyboard support for number entry
+document.addEventListener("keydown", function (e) {
 	let key = e.key;
-	if(!isNaN(key)) {
+	if (!isNaN(key)) {
 		appendToDisplay(key);
-	} else {
-		alert('Error: Invalid input')
+	// } else {
+	// 	alert("Error: Invalid input");
 	}
+});
+
+// Keyboard support for delete/backspace entry
+document.addEventListener("keydown", function (e) {
+	if (e.key === 'Delete' || 'Backspace') {
+		return deleteNum();
+	};
 });
