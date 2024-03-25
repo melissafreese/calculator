@@ -55,19 +55,12 @@ function calculate() {
 	operation = null;
 }
 
-// Keyboard support for number entry
+// Keyboard support for number entry and delete button
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
-	if (!isNaN(key)) {
-		appendToDisplay(key);
-	// } else {
-	// 	alert("Error: Invalid input");
-	}
-});
-
-// Keyboard support for delete/backspace entry
-document.addEventListener("keydown", function (e) {
-	if (e.key === 'Delete' || 'Backspace') {
+	if (key === "Backspace") {
 		return deleteNum();
-	};
+	} else {
+		return appendToDisplay(`${key}`);
+	}
 });
