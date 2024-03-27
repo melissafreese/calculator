@@ -1,5 +1,5 @@
 "use strict";
-// Declare variables 
+// Declare variables
 const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 const digits = document.querySelectorAll(".digit");
@@ -71,7 +71,7 @@ function calculate() {
 		case "/":
 			result = num1 / num2;
 			break;
-		case '%':
+		case "%":
 			result = (num1 / 100) * num2;
 			break;
 		default:
@@ -79,7 +79,7 @@ function calculate() {
 	}
 	console.log("num1:", num1);
 	console.log("num2:", num2);
-	console.log('result:', result);
+	console.log("result:", result);
 
 	currentNum = result;
 	operation = undefined;
@@ -89,17 +89,19 @@ function calculate() {
 
 // Handle decimal point input
 function appendDot() {
-	if (currentNum.includes(".")) return; // Prevent multiple decimals
-	if (currentNum === "") currentNum = "0"; // If empty, start with '0.'
-	currentNum += ".";
-	updateDisplay();
-}
-
-/*if statement repetative?*/ 
+	if (!currentNum.includes(".")) {
+		currentNum += currentNum === "" ? "0" : ".";
+		updateDisplay();
+	};
+	
+};
+// Appends entered number to the current number on display
 function appendNumber(number) {
-	if (number === "." && currentNum.includes(".")) return; //Prevent multiple decimals
-	currentNum = currentNum.toString() + number.toString();
-}
+	if (!(number === "." && currentNum.includes("."))) {
+		currentNum = currentNum.toString() + number.toString();
+		updateDisplay();
+	};
+};
 
 //
 function chooseOperation(selectedOperation) {
@@ -113,10 +115,6 @@ function chooseOperation(selectedOperation) {
 }
 
 // Update display during calculation
-/* 
-- first and second operand are defined as variables. check if replacing works
-- replace if/else with ternary ops
-*/
 function updateDisplay() {
 	if (previousNum && operation) {
 		displayNum1.innerText = "";
