@@ -93,7 +93,7 @@ function appendDot() {
 }
 
 function appendNumber(number) {
-	if (number === "." && currentNum.includes(".")) return;//Prevent multiple decimals 
+	if (number === "." && currentNum.includes(".")) return; //Prevent multiple decimals
 	currentNum = currentNum.toString() + number.toString();
 }
 
@@ -110,10 +110,17 @@ function chooseOperation(selectedOperation) {
 
 // Update Display Function
 function updateDisplay() {
-	document.getElementById("first-operand").innerText = currentNum;
-	document.getElementById("second-operand").innerText =
-		previousNum + "" + (operation || "");
+	if (previousNum && operation) {
+		document.getElementById("first-operand").innerText = "";
+		document.getElementById(
+			"second-operand"
+		).innerText = `${previousNum} ${operation} ${currentNum}`;
+	} else {
+		document.getElementById("first-operand").innerText = currentNum;
+		document.getElementById("second-operand").innerText = "";
+	}
 }
+
 // Keyboard support
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
