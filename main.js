@@ -1,6 +1,5 @@
 "use strict";
-// Get the display element
-const calculator = document.getElementById("calculator");
+// Declare variables 
 const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 const digits = document.querySelectorAll(".digit");
@@ -72,6 +71,9 @@ function calculate() {
 		case "/":
 			result = num1 / num2;
 			break;
+		case '%':
+			result = (num1 / 100) * num2;
+			break;
 		default:
 			return;
 	}
@@ -133,8 +135,8 @@ document.addEventListener("keydown", function (e) {
 	} else if (key === "+" || key === "-" || key === "*" || key === "/") {
 		chooseOperation(key);
 		updateDisplay();
-	} else if (key === "Enter" || key === '=') {
+	} else if (key === "Enter" || key === "=") {
 		calculate();
 		updateDisplay();
-	};
+	}
 });
