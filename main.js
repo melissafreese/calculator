@@ -49,6 +49,11 @@ function deleteNum() {
 	currentNum = currentNum.toString().slice(0, -1);
 	updateDisplay();
 }
+// Limits number of decimal places displayed
+function roundNumber(num, decimalPlaces) {
+	const factor = Math.pow(10, decimalPlaces);
+	return Math.round(num * factor) / factor;
+}
 
 // Perform calculation
 function calculate() {
@@ -57,6 +62,12 @@ function calculate() {
 	const num1 = parseFloat(previousNum);
 	const num2 = parseFloat(currentNum);
 	if (isNaN(num1) || isNaN(num2)) return;
+
+	// Check for division by zero
+	if ((operation === "/") & (num2 === 0)) {
+		displayError("ERROR");
+		return;
+	}
 
 	switch (operation) {
 		case "+":
@@ -81,10 +92,19 @@ function calculate() {
 	console.log("num2:", num2);
 	console.log("result:", result);
 
-	currentNum = result;
+
+	const roundedResult = roundNumber(result, 10);
+
+	currentNum = roundedResult;
 	operation = undefined;
 	previousNum = "";
 	updateDisplay(); // Refresh the display with new state
+}
+
+function displayError(errorMessage) {
+	// Display error message on calculator display
+	displayNum1.innerText = "";
+	displayNum2.innerText = errorMessage;
 }
 
 // Handle decimal point input
@@ -92,18 +112,17 @@ function appendDot() {
 	if (!currentNum.includes(".")) {
 		currentNum += currentNum === "" ? "0" : ".";
 		updateDisplay();
-	};
-	
-};
+	}
+}
 // Appends entered number to the current number on display
 function appendNumber(number) {
 	if (!(number === "." && currentNum.includes("."))) {
 		currentNum = currentNum.toString() + number.toString();
 		updateDisplay();
-	};
-};
+	}
+}
 
-//
+// Handles selection of arithmatic operation
 function chooseOperation(selectedOperation) {
 	if (currentNum === "") return;
 	if (previousNum !== "") {
@@ -126,10 +145,6 @@ function updateDisplay() {
 }
 
 // Keyboard support
-/* 
-- check for refactoring
-- replace if/else with ternary ops
-*/
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
 	if (!isNaN(key) || key === ".") {
