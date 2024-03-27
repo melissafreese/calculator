@@ -1,66 +1,129 @@
+"use strict";
 // Get the display element
-const display = document.getElementById("display");
+const calculator = document.getElementById("calculator");
+const displayNum1 = document.getElementById("first-operand");
+const displayNum2 = document.getElementById("second-operand");
+const digits = document.querySelectorAll(".digit");
+const operators = document.querySelectorAll(".operator");
+const clearBtn = document.getElementById("clear");
+const deleteBtn = document.getElementById("delete");
+const dotBtn = document.getElementById("dot");
+const equalsBtn = document.getElementById("equals");
 
-// Variables to store the current operation and operands ????
-let currentInput = "";
+// Displays digits when clicked
+digits.forEach(button => {
+	button.addEventListener("click", () => {
+		appendNumber(button.innerText);
+		updateDisplay();
+	});
+});
+
+// Displays operators when clicked
+operators.forEach(button => {
+	button.addEventListener("click", () => {
+		chooseOperation(button.innerText);
+		updateDisplay();
+	});
+});
+
+// Event listeners for operator buttons
+clearBtn.addEventListener("click", clearDisplay);
+deleteBtn.addEventListener("click", deleteNum);
+dotBtn.addEventListener("click", appendDot);
+equalsBtn.addEventListener("click", calculate);
+
+// Variables to store the current operation and operands
+let currentNum = "";
+let previousNum = "";
 let operation = null;
-let firstOperand = "";
-let secondOperand = "";
 
-// Append Display Function
-function appendToDisplay(input) {
-	display.value += input;
-}
 // Clear Display Function
 function clearDisplay() {
-	display.value = "";
+	currentNum = "";
+	previousNum = "";
+	operation = null;
+	updateDisplay();
 }
 
 // Delete Function
 function deleteNum() {
-	display.value = display.value.slice(0, -1);
+	currentNum = currentNum.toString().slice(0, -1);
+	updateDisplay();
 }
 
-// Set Operation Function ????
-function setOperation(op) {
-	operation = op;
-	currentInput = `${op}`;
-	display.value = currentInput;
-}
-
-// Calculate Function ???
+// Perform calculation
 function calculate() {
-	const [firstOperand, _, secondOperand] = currentInput.split("");
 	let result;
+	// Convert operands to numbers
+	const num1 = parseFloat(previousNum);
+	const num2 = parseFloat(currentNum);
+	if (isNaN(num1) || isNaN(num2)) return;
 
-	switch (currentInput) {
+	switch (operation) {
 		case "+":
-			result = parseFloat(firstOperand) + parseFloat(secondOperand);
+			result = num1 + num2;
 			break;
-
 		case "-":
-			result = parseFloat(firstOperand) - parseFloat(secondOperand);
+			result = num1 - num2;
 			break;
-
 		case "*":
-			result = parseFloat(firstOperand) * parseFloat(secondOperand);
+			result = num1 * num2;
 			break;
 		case "/":
-			result = parseFloat(firstOperand) / parseFloat(secondOperand);
+			result = num1 / num2;
 			break;
+		default:
+			return;
 	}
+	console.log("num1:", num1);
+	console.log("num2:", num2);
 
-	display.value = result;
-	currentInput = `${result}`;
-	operation = null;
+	currentNum = result;
+	operation = undefined;
+	previousNum = "";
+	updateDisplay(); // Refresh the display with new state
 }
 
-// Keyboard support for number entry and delete button
+// Handle decimal point input
+function appendDot() {
+	if (currentNum.includes(".")) return; // Prevent multiple decimals
+	if (currentNum === "") currentNum = "0"; // If empty, start with '0.'
+	currentNum += ".";
+	updateDisplay();
+}
+
+function appendNumber(number) {
+	if (number === "." && currentNum.includes(".")) return;//Prevent multiple decimals 
+	currentNum = currentNum.toString() + number.toString();
+}
+
+//
+function chooseOperation(selectedOperation) {
+	if (currentNum === "") return;
+	if (previousNum !== "") {
+		calculate();
+	}
+	operation = selectedOperation;
+	previousNum = currentNum;
+	currentNum = "";
+}
+
+// Update Display Function
+function updateDisplay() {
+	document.getElementById("first-operand").innerText = currentNum;
+	document.getElementById("second-operand").innerText =
+		previousNum + "" + (operation || "");
+}
+// Keyboard support
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
 	if (key === "Backspace") {
-		return deleteNum();
-	} else {
-		return appendToDisplay(`${key}`);
+		deleteNum();
+	} else if (!isNaN(key) || key === ".") {
+		updateDisplay(key);
+	} else if (key === "+" || key === "-" || key === "*" || key === "/") {
+		chooseOperation(key);
+	} else if (key === "Enter") {
+		calculate();
 	}
 });

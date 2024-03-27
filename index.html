@@ -16,33 +16,31 @@
 	<body>
 		<div id="container">
 			<div id="calculator">
-				<div id="display-wrapper">
-					<input readonly id="display" />
+				<div id="display">
+					<!-- <input readonly id="display" /> --> 
+					<div id="first-operand"></div>
+					<div id="second-operand"></div>
 				</div>
 				<div id="keys">
-					<button onclick="clearDisplay()">AC</button>
-					<button onclick="deleteNum()">DEL</button>
-					<button onclick="appendToDisplay('%')">&#37;</button>
-					<button class="operator" onclick="appendToDisplay('/')">/</button>
-					<button class="digit" onclick="appendToDisplay('7')">7</button>
-					<button class="digit" onclick="appendToDisplay('8')">8</button>
-					<button class="digit" onclick="appendToDisplay('9')">9</button>
-					<button class="operator" onclick="appendToDisplay('*')">*</button>
-					<button class="digit" onclick="appendToDisplay('4')">4</button>
-					<button class="digit" onclick="appendToDisplay('5')">5</button>
-					<button class="digit" onclick="appendToDisplay('6')">6</button>
-					<button class="operator" onclick="appendToDisplay('-')">
-						-
-					</button>
-					<button class="digit" onclick="appendToDisplay('1')">1</button>
-					<button class="digit" onclick="appendToDisplay('2')">2</button>
-					<button class="digit" onclick="appendToDisplay('3')">3</button>
-					<button class="operator" onclick="appendToDisplay('+')">+</button>
-					<button class="digit width-2" onclick="appendToDisplay('0')">
-						0
-					</button>
-					<button onclick="appendToDisplay('.')">.</button>
-					<button class="equals" onclick="calculate()">=</button>
+					<button id="clear">AC</button>
+					<button id="delete">DEL</button>
+					<button class="operator">%</button>
+					<button class="operator">/</button>
+					<button class="digit">7</button>
+					<button class="digit">8</button>
+					<button class="digit">9</button>
+					<button class="operator">*</button>
+					<button class="digit">4</button>
+					<button class="digit">5</button>
+					<button class="digit">6</button>
+					<button class="operator">-</button>
+					<button class="digit">1</button>
+					<button class="digit">2</button>
+					<button class="digit">3</button>
+					<button class="operator">+</button>
+					<button class="digit width-2">0</button>
+					<button id="dot">.</button>
+					<button id="equals">=</button>
 				</div>
 			</div>
 		</div>
