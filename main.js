@@ -79,6 +79,7 @@ function calculate() {
 	}
 	console.log("num1:", num1);
 	console.log("num2:", num2);
+	console.log('result:', result);
 
 	currentNum = result;
 	operation = undefined;
@@ -94,6 +95,7 @@ function appendDot() {
 	updateDisplay();
 }
 
+/*if statement repetative?*/ 
 function appendNumber(number) {
 	if (number === "." && currentNum.includes(".")) return; //Prevent multiple decimals
 	currentNum = currentNum.toString() + number.toString();
@@ -110,20 +112,26 @@ function chooseOperation(selectedOperation) {
 	currentNum = "";
 }
 
-// Update Display Function
+// Update display during calculation
+/* 
+- first and second operand are defined as variables. check if replacing works
+- replace if/else with ternary ops
+*/
 function updateDisplay() {
 	if (previousNum && operation) {
-		document.getElementById("first-operand").innerText = "";
-		document.getElementById(
-			"second-operand"
-		).innerText = `${previousNum} ${operation} ${currentNum}`;
+		displayNum1.innerText = "";
+		displayNum2.innerText = `${previousNum} ${operation} ${currentNum}`;
 	} else {
-		document.getElementById("first-operand").innerText = currentNum;
-		document.getElementById("second-operand").innerText = "";
+		displayNum1.innerText = currentNum;
+		displayNum2.innerText = "";
 	}
 }
 
 // Keyboard support
+/* 
+- check for refactoring
+- replace if/else with ternary ops
+*/
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
 	if (!isNaN(key) || key === ".") {
