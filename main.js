@@ -124,13 +124,17 @@ function updateDisplay() {
 // Keyboard support
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
-	if (key === "Backspace") {
+	if (!isNaN(key) || key === ".") {
+		appendNumber(key);
+		updateDisplay();
+	} else if (key === "Backspace") {
 		deleteNum();
-	} else if (!isNaN(key) || key === ".") {
-		updateDisplay(key);
+		updateDisplay();
 	} else if (key === "+" || key === "-" || key === "*" || key === "/") {
 		chooseOperation(key);
-	} else if (key === "Enter") {
+		updateDisplay();
+	} else if (key === "Enter" || key === '=') {
 		calculate();
-	}
+		updateDisplay();
+	};
 });
