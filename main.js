@@ -1,5 +1,5 @@
 "use strict";
-// Declare variables
+
 const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 
@@ -11,10 +11,9 @@ document.querySelectorAll('.digit').forEach(button => {
 	});
 });
 
-const operators = document.querySelectorAll(".operator");
-// Displays operators when clicked
-operators.forEach(button => {
-	button.addEventListener("click", () => {
+/* Displays operators when clicked */
+document.querySelectorAll('.operator').forEach(button => {
+	button.addEventListener('click', () => {
 		chooseOperation(button.innerText);
 		updateDisplay();
 	});
