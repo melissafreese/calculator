@@ -4,14 +4,21 @@ const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
-const dotBtn = document.getElementById("dot");
 const equalsBtn = document.getElementById("equals");
 
-dotBtn.addEventListener("click", appendDot);
+
 equalsBtn.addEventListener("click", calculate);
 
+// Handle decimal point input -- still need to refactor 
+document.getElementById('dot').addEventListener('click', function(){
+	if (!currentNum.includes('.')){
+		currentNum += currentNum === "" ? "0" : '.';
+		updateDisplay();
+	};
+});
+
 // Delete single digit
-document.addEventListener("click", function (e) {
+document.addEventListener("click", function(e) {
 	if (e.target.id == "delete") {
 		currentNum = currentNum.toString().slice(0, -1);
 		updateDisplay();
@@ -19,7 +26,7 @@ document.addEventListener("click", function (e) {
 });
 
 // Clears Display
-document.addEventListener("click", function (e) {
+document.addEventListener("click", function(e) {
 	if (e.target.id == "clear") {
 		currentNum = "";
 		previousNum = "";
@@ -99,14 +106,6 @@ function calculate() {
 	operation = undefined;
 	previousNum = "";
 	updateDisplay(); // Refresh the display with new state
-}
-
-// Handle decimal point input
-function appendDot() {
-	if (!currentNum.includes(".")) {
-		currentNum += currentNum === "" ? "0" : ".";
-		updateDisplay();
-	}
 }
 
 // Handles selection of arithmatic operation
