@@ -4,10 +4,9 @@ const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
-const equalsBtn = document.getElementById("equals");
 
-
-equalsBtn.addEventListener("click", calculate);
+// Equals button to perform calculation
+document.getElementById('equals').addEventListener("click", calculate);
 
 // Handle decimal point input -- still need to refactor 
 document.getElementById('dot').addEventListener('click', function(){
