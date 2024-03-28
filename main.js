@@ -4,9 +4,29 @@ const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
-const deleteBtn = document.getElementById("delete");
 const dotBtn = document.getElementById("dot");
 const equalsBtn = document.getElementById("equals");
+
+dotBtn.addEventListener("click", appendDot);
+equalsBtn.addEventListener("click", calculate);
+
+// Delete single digit
+document.addEventListener("click", function (e) {
+	if (e.target.id == "delete") {
+		currentNum = currentNum.toString().slice(0, -1);
+		updateDisplay();
+	}
+});
+
+// Clears Display
+document.addEventListener("click", function (e) {
+	if (e.target.id == "clear") {
+		currentNum = "";
+		previousNum = "";
+		operation = null;
+	}
+	updateDisplay();
+});
 
 // Displays digits when clicked
 digits.forEach(button => {
@@ -31,32 +51,11 @@ function appendNumber(number) {
 	}
 }
 
-// Event listeners for operator buttons
-
-deleteBtn.addEventListener("click", deleteNum);
-dotBtn.addEventListener("click", appendDot);
-equalsBtn.addEventListener("click", calculate);
-
 // Variables to store the current operation and operands
 let currentNum = "";
 let previousNum = "";
 let operation = null;
 
-// Clear Display Function
-document.addEventListener("click", function (e) {
-	if (e.target.id == "clear") {
-		currentNum = "";
-		previousNum = "";
-		operation = null;
-	}
-	updateDisplay();
-});
-
-// Delete Function
-function deleteNum() {
-	currentNum = currentNum.toString().slice(0, -1);
-	updateDisplay();
-}
 // Limits number of decimal places displayed
 function roundNumber(num, decimalPlaces) {
 	const factor = Math.pow(10, decimalPlaces);
