@@ -4,7 +4,6 @@ const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
-const clearBtn = document.getElementById("clear");
 const deleteBtn = document.getElementById("delete");
 const dotBtn = document.getElementById("dot");
 const equalsBtn = document.getElementById("equals");
@@ -24,9 +23,16 @@ operators.forEach(button => {
 		updateDisplay();
 	});
 });
+// Appends entered number to the current number on display
+function appendNumber(number) {
+	if (!(number === "." && currentNum.includes("."))) {
+		currentNum = currentNum.toString() + number.toString();
+		updateDisplay();
+	}
+}
 
 // Event listeners for operator buttons
-clearBtn.addEventListener("click", clearDisplay);
+
 deleteBtn.addEventListener("click", deleteNum);
 dotBtn.addEventListener("click", appendDot);
 equalsBtn.addEventListener("click", calculate);
@@ -37,12 +43,14 @@ let previousNum = "";
 let operation = null;
 
 // Clear Display Function
-function clearDisplay() {
-	currentNum = "";
-	previousNum = "";
-	operation = null;
+document.addEventListener("click", function (e) {
+	if (e.target.id == "clear") {
+		currentNum = "";
+		previousNum = "";
+		operation = null;
+	}
 	updateDisplay();
-}
+});
 
 // Delete Function
 function deleteNum() {
@@ -62,12 +70,6 @@ function calculate() {
 	const num1 = parseFloat(previousNum);
 	const num2 = parseFloat(currentNum);
 	if (isNaN(num1) || isNaN(num2)) return;
-
-	// Check for division by zero
-	if ((operation === "/") & (num2 === 0)) {
-		displayError("ERROR");
-		return;
-	}
 
 	switch (operation) {
 		case "+":
@@ -92,7 +94,6 @@ function calculate() {
 	console.log("num2:", num2);
 	console.log("result:", result);
 
-
 	const roundedResult = roundNumber(result, 10);
 
 	currentNum = roundedResult;
@@ -101,23 +102,10 @@ function calculate() {
 	updateDisplay(); // Refresh the display with new state
 }
 
-function displayError(errorMessage) {
-	// Display error message on calculator display
-	displayNum1.innerText = "";
-	displayNum2.innerText = errorMessage;
-}
-
 // Handle decimal point input
 function appendDot() {
 	if (!currentNum.includes(".")) {
 		currentNum += currentNum === "" ? "0" : ".";
-		updateDisplay();
-	}
-}
-// Appends entered number to the current number on display
-function appendNumber(number) {
-	if (!(number === "." && currentNum.includes("."))) {
-		currentNum = currentNum.toString() + number.toString();
 		updateDisplay();
 	}
 }
