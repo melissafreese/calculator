@@ -2,46 +2,16 @@
 // Declare variables
 const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
-const digits = document.querySelectorAll(".digit");
-const operators = document.querySelectorAll(".operator");
 
-// Equals button to perform calculation
-document.getElementById('equals').addEventListener("click", calculate);
-
-// Handle decimal point input -- still need to refactor 
-document.getElementById('dot').addEventListener('click', function(){
-	if (!currentNum.includes('.')){
-		currentNum += currentNum === "" ? "0" : '.';
-		updateDisplay();
-	};
-});
-
-// Delete single digit
-document.addEventListener("click", function(e) {
-	if (e.target.id == "delete") {
-		currentNum = currentNum.toString().slice(0, -1);
-		updateDisplay();
-	}
-});
-
-// Clears Display
-document.addEventListener("click", function(e) {
-	if (e.target.id == "clear") {
-		currentNum = "";
-		previousNum = "";
-		operation = null;
-	}
-	updateDisplay();
-});
-
-// Displays digits when clicked
-digits.forEach(button => {
-	button.addEventListener("click", () => {
+// Display digits when digit button is clicked
+document.querySelectorAll('.digit').forEach(button => {
+	button.addEventListener('click', () => {
 		appendNumber(button.innerText);
 		updateDisplay();
 	});
 });
 
+const operators = document.querySelectorAll(".operator");
 // Displays operators when clicked
 operators.forEach(button => {
 	button.addEventListener("click", () => {
@@ -49,6 +19,12 @@ operators.forEach(button => {
 		updateDisplay();
 	});
 });
+
+// Variables to store the current operation and operands
+let currentNum = "";
+let previousNum = "";
+let operation = null;
+
 // Appends entered number to the current number on display
 function appendNumber(number) {
 	if (!(number === "." && currentNum.includes("."))) {
@@ -57,15 +33,41 @@ function appendNumber(number) {
 	}
 }
 
-// Variables to store the current operation and operands
-let currentNum = "";
-let previousNum = "";
-let operation = null;
+// Handle decimal point input -- still need to refactor
+document.getElementById("dot").addEventListener("click", function () {
+	if (!currentNum.includes(".")) {
+		currentNum += currentNum === "" ? "0" : ".";
+		updateDisplay();
+	}
+});
 
-// Limits number of decimal places displayed
-function roundNumber(num, decimalPlaces) {
-	const factor = Math.pow(10, decimalPlaces);
-	return Math.round(num * factor) / factor;
+// Delete single digit
+document.addEventListener("click", function (e) {
+	if (e.target.id == "delete") {
+		currentNum = currentNum.toString().slice(0, -1);
+		updateDisplay();
+	}
+});
+
+// Clears Display
+document.addEventListener("click", function (e) {
+	if (e.target.id == "clear") {
+		currentNum = "";
+		previousNum = "";
+		operation = null;
+	}
+	updateDisplay();
+});
+
+// Handles selection of arithmatic operation
+function chooseOperation(selectedOperation) {
+	if (currentNum === "") return;
+	if (previousNum !== "") {
+		calculate();
+	}
+	operation = selectedOperation;
+	previousNum = currentNum;
+	currentNum = "";
 }
 
 // Perform calculation
@@ -95,11 +97,13 @@ function calculate() {
 		default:
 			return;
 	}
-	console.log("num1:", num1);
-	console.log("num2:", num2);
-	console.log("result:", result);
 
 	const roundedResult = roundNumber(result, 10);
+	// Limits number of decimal places displayed
+	function roundNumber(num, decimalPlaces) {
+		const factor = Math.pow(10, decimalPlaces);
+		return Math.round(num * factor) / factor;
+	}
 
 	currentNum = roundedResult;
 	operation = undefined;
@@ -107,16 +111,8 @@ function calculate() {
 	updateDisplay(); // Refresh the display with new state
 }
 
-// Handles selection of arithmatic operation
-function chooseOperation(selectedOperation) {
-	if (currentNum === "") return;
-	if (previousNum !== "") {
-		calculate();
-	}
-	operation = selectedOperation;
-	previousNum = currentNum;
-	currentNum = "";
-}
+// Equals button to perform calculation
+document.getElementById("equals").addEventListener("click", calculate);
 
 // Update display during calculation
 function updateDisplay() {
@@ -129,7 +125,7 @@ function updateDisplay() {
 	}
 }
 
-// Keyboard support
+//Keyboard support
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
 	if (!isNaN(key) || key === ".") {
