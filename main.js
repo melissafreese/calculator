@@ -3,8 +3,8 @@
 const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 
-// Display digits when digit button is clicked
-document.querySelectorAll('.digit').forEach(button => {
+/* Display digits when digit button is clicked */
+document.querySelectorAll('.numbers').forEach(button => {
 	button.addEventListener('click', () => {
 		appendNumber(button.innerText);
 		updateDisplay();
@@ -12,19 +12,19 @@ document.querySelectorAll('.digit').forEach(button => {
 });
 
 /* Displays operators when clicked */
-document.querySelectorAll('.operator').forEach(button => {
+document.querySelectorAll('.operators').forEach(button => {
 	button.addEventListener('click', () => {
 		chooseOperation(button.innerText);
 		updateDisplay();
 	});
 });
 
-// Variables to store the current operation and operands
+/* Variables to store the current operation and operands */
 let currentNum = "";
 let previousNum = "";
 let operation = null;
 
-// Appends entered number to the current number on display
+/* Appends entered number to the current number on display */
 function appendNumber(number) {
 	if (!(number === "." && currentNum.includes("."))) {
 		currentNum = currentNum.toString() + number.toString();
@@ -32,25 +32,25 @@ function appendNumber(number) {
 	}
 }
 
-// Handle decimal point input -- still need to refactor
-document.getElementById("dot").addEventListener("click", function () {
+/* Handle decimal point input -- still need to refactor */
+document.getElementById("decimal").addEventListener("click", function () {
 	if (!currentNum.includes(".")) {
 		currentNum += currentNum === "" ? "0" : ".";
 		updateDisplay();
 	}
 });
 
-// Delete single digit
+/* Deletes most recently added number or operator */
 document.addEventListener("click", function (e) {
-	if (e.target.id == "delete") {
+	if (e.target.id == "deleteBtn") {
 		currentNum = currentNum.toString().slice(0, -1);
 		updateDisplay();
 	}
 });
 
-// Clears Display
+/* Clears Display */
 document.addEventListener("click", function (e) {
-	if (e.target.id == "clear") {
+	if (e.target.id == "clearBtn") {
 		currentNum = "";
 		previousNum = "";
 		operation = null;
@@ -58,7 +58,7 @@ document.addEventListener("click", function (e) {
 	updateDisplay();
 });
 
-// Handles selection of arithmatic operation
+/* Handles selection of arithmatic operation */
 function chooseOperation(selectedOperation) {
 	if (currentNum === "") return;
 	if (previousNum !== "") {
@@ -69,7 +69,7 @@ function chooseOperation(selectedOperation) {
 	currentNum = "";
 }
 
-// Perform calculation
+/* Perform calculation */
 function calculate() {
 	let result;
 	// Convert operands to numbers
@@ -110,10 +110,10 @@ function calculate() {
 	updateDisplay(); // Refresh the display with new state
 }
 
-// Equals button to perform calculation
+/* Equals button to perform calculation */
 document.getElementById("equals").addEventListener("click", calculate);
 
-// Update display during calculation
+/* Update display during calculation */
 function updateDisplay() {
 	if (previousNum && operation) {
 		displayNum1.innerText = "";
@@ -124,19 +124,19 @@ function updateDisplay() {
 	}
 }
 
-//Keyboard support
+/* Keyboard support */
 document.addEventListener("keydown", function (e) {
 	let key = e.key;
 	if (!isNaN(key) || key === ".") {
 		appendNumber(key);
 		updateDisplay();
 	} else if (key === "Backspace") {
-		deleteNum();
 		updateDisplay();
 	} else if (key === "+" || key === "-" || key === "*" || key === "/") {
 		chooseOperation(key);
 		updateDisplay();
-	} else if (key === "Enter" || key === "=") {
+	} 
+	else if (key === "Enter" || key === "=") {
 		calculate();
 		updateDisplay();
 	}
