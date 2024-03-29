@@ -3,42 +3,69 @@
 const displayNum1 = document.getElementById("first-operand");
 const displayNum2 = document.getElementById("second-operand");
 
-/* Display digits when digit button is clicked */
-document.querySelectorAll('.numbers').forEach(button => {
-	button.addEventListener('click', () => {
+/* Displays selected number when a number button is clicked */
+document.querySelectorAll(".numbers").forEach(button => {
+	button.addEventListener("click", () => {
 		appendNumber(button.innerText);
 		updateDisplay();
 	});
 });
 
-/* Displays operators when clicked */
-document.querySelectorAll('.operators').forEach(button => {
-	button.addEventListener('click', () => {
+/* Displays selected operator when an operator button is clicked */
+document.querySelectorAll(".operators").forEach(button => {
+	button.addEventListener("click", () => {
 		chooseOperation(button.innerText);
 		updateDisplay();
 	});
 });
 
-/* Variables to store the current operation and operands */
+/* Variables to store the current number selected, previous number selected and the operation selected */
 let currentNum = "";
 let previousNum = "";
 let operation = null;
 
-/* Appends entered number to the current number on display */
+/* 
+	Allows user to add decimal point to current number
+		1. prevents decimal point duplication 
+		2. if empty string, add "0." to handle string starting with decimal
+		3. updates display to reflect decimal input
+*/
+document.getElementById("decimal").addEventListener("click", function () {
+	if (!currentNum.includes(".")) {
+		if (currentNum === "") {
+			currentNum = "0.";
+		} else {
+			currentNum += ".";
+		};
+		updateDisplay();
+	}
+});
+/* 
+	Function to ensure only one decminal point can be added
+		1. "if" statement checks if: 
+ 			a. clicked button represents a decimal point 
+			b. current number already contains a decimal point
+			c. both conditions return true; function will exit without adding another decimal point
+		2.  if true; concatenate current number and decimal to string
+		3. updates display to reflect new number
+*/
 function appendNumber(number) {
-	if (!(number === "." && currentNum.includes("."))) {
+	if (!(number === "." && currentNum.includes("."))) { 
 		currentNum = currentNum.toString() + number.toString();
 		updateDisplay();
 	}
 }
 
-/* Handle decimal point input -- still need to refactor */
-document.getElementById("decimal").addEventListener("click", function () {
-	if (!currentNum.includes(".")) {
-		currentNum += currentNum === "" ? "0" : ".";
-		updateDisplay();
+/* Handles selection of arithmatic operation */
+function chooseOperation(selectedOperation) {
+	if (currentNum === "") return;
+	if (previousNum !== "") {
+		calculate();
 	}
-});
+	operation = selectedOperation;
+	previousNum = currentNum;
+	currentNum = "";
+}
 
 /* Deletes most recently added number or operator */
 document.addEventListener("click", function (e) {
@@ -54,20 +81,10 @@ document.addEventListener("click", function (e) {
 		currentNum = "";
 		previousNum = "";
 		operation = null;
-	}
-	updateDisplay();
+		updateDisplay();
+	};
 });
 
-/* Handles selection of arithmatic operation */
-function chooseOperation(selectedOperation) {
-	if (currentNum === "") return;
-	if (previousNum !== "") {
-		calculate();
-	}
-	operation = selectedOperation;
-	previousNum = currentNum;
-	currentNum = "";
-}
 
 /* Perform calculation */
 function calculate() {
@@ -97,17 +114,12 @@ function calculate() {
 			return;
 	}
 
-	const roundedResult = roundNumber(result, 10);
-	// Limits number of decimal places displayed
-	function roundNumber(num, decimalPlaces) {
-		const factor = Math.pow(10, decimalPlaces);
-		return Math.round(num * factor) / factor;
-	}
+	const roundedResult = result.toFixed(2);
 
 	currentNum = roundedResult;
 	operation = undefined;
 	previousNum = "";
-	updateDisplay(); // Refresh the display with new state
+	updateDisplay(); 
 }
 
 /* Equals button to perform calculation */
@@ -135,8 +147,7 @@ document.addEventListener("keydown", function (e) {
 	} else if (key === "+" || key === "-" || key === "*" || key === "/") {
 		chooseOperation(key);
 		updateDisplay();
-	} 
-	else if (key === "Enter" || key === "=") {
+	} else if (key === "Enter" || key === "=") {
 		calculate();
 		updateDisplay();
 	}
