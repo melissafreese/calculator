@@ -4,14 +4,14 @@
 
 [Live Demo](https://melissafreese.github.io/calculator/)
 
-!
+![alt text](https://github.com/melissafreese/calculator/edit/main/images/calculator.png)
 
-# Technologies Used
+## Technologies Used
  * JavaScript
  * HTML5 
  * CSS3
 
-# Features
+## Features
 * Perform basic arithmatic operations (addition, subtraction, multiplication, division)
 * Handle decial numbers 
 * Support for basic memory operations (clear, delete last digit)
@@ -25,6 +25,6 @@ Contributions, issues and feature requests are welcome!
 ## Known issues (Work in progress)
 * Division by zero returns as infinity (resolution coming soon!)
 
-# Acknowledgement
+## Acknowledgement
 
 Project inspitation from [The Odin Project](https://www.theodinproject.com/lessons/foundations-calculator)
