@@ -30,13 +30,14 @@ let operation = null;
 		2. if empty string, add "0." to handle string starting with decimal
 		3. updates display to reflect decimal input
 */
+
 document.getElementById("decimal").addEventListener("click", function () {
 	if (!currentNum.includes(".")) {
 		if (currentNum === "") {
 			currentNum = "0.";
 		} else {
 			currentNum += ".";
-		};
+		}
 		updateDisplay();
 	}
 });
@@ -50,7 +51,7 @@ document.getElementById("decimal").addEventListener("click", function () {
 		3. updates display to reflect new number
 */
 function appendNumber(number) {
-	if (!(number === "." && currentNum.includes("."))) { 
+	if (!(number === "." && currentNum.includes("."))) {
 		currentNum = currentNum.toString() + number.toString();
 		updateDisplay();
 	}
@@ -76,22 +77,23 @@ document.addEventListener("click", function (e) {
 });
 
 /* Clears Display */
+
 document.addEventListener("click", function (e) {
 	if (e.target.id == "clearBtn") {
 		currentNum = "";
 		previousNum = "";
 		operation = null;
 		updateDisplay();
-	};
+	}
 });
-
 
 /* Perform calculation */
 function calculate() {
 	let result;
-	// Convert operands to numbers
+
 	const num1 = parseFloat(previousNum);
 	const num2 = parseFloat(currentNum);
+
 	if (isNaN(num1) || isNaN(num2)) return;
 
 	switch (operation) {
@@ -119,7 +121,11 @@ function calculate() {
 	currentNum = roundedResult;
 	operation = undefined;
 	previousNum = "";
-	updateDisplay(); 
+	updateDisplay();
+
+	console.log("result:", roundedResult);
+	console.log("num1:", num1);
+	console.log("num2:", num2);
 }
 
 /* Equals button to perform calculation */
@@ -143,6 +149,7 @@ document.addEventListener("keydown", function (e) {
 		appendNumber(key);
 		updateDisplay();
 	} else if (key === "Backspace") {
+		currentNum = currentNum.toString().slice(0, -1);
 		updateDisplay();
 	} else if (key === "+" || key === "-" || key === "*" || key === "/") {
 		chooseOperation(key);
