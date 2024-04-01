@@ -5,7 +5,7 @@
 [Live Demo](https://melissafreese.github.io/calculator/)
 
 ![alt text](https://github.com/melissafreese/calculator/edit/main/images/calculator.png)
-
+![alt text](https://github.com/melissafreese/calculator/images/calculator.png)
 ## Technologies Used
  * JavaScript
  * HTML5 
