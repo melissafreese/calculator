@@ -155,7 +155,7 @@ document.addEventListener("keydown", function (e) {
 		chooseOperation(key);
 		updateDisplay();
 	} else if (key === "Enter" || key === "=") {
-		calculate();
+		calculate(currentNum);
 		updateDisplay();
 	}
 });
