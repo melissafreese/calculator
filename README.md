@@ -2,7 +2,7 @@
 
 ## A fully functional calculator project built with Vanilla Javascript
 
-[Live Demo](https://melissafreese.github.io/calculator/)
+[Live Demo Coming Soon](https://melissafreese.github.io/calculator/)
 ![alt text](images/calculator.png)
 
 ## Technologies Used
